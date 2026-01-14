@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import WhatsAppButton from "./components/WhatsAppButton";
+import SEOSchema from "./components/SEOSchema";
+import { SiteProvider } from "./context/SiteContext";
 
 // Public Pages
 import Home from "./page/Home";
@@ -39,6 +41,8 @@ function AppContent() {
 
   return (
     <>
+      {/* SEO Schema - Only for public routes */}
+      {!isAdminRoute && <SEOSchema />}
       {/* Show Header and Footer only for public routes */}
       {!isAdminRoute && <Header />}
       <ScrollToTop />
@@ -164,7 +168,9 @@ function AppContent() {
 export default function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <SiteProvider>
+        <AppContent />
+      </SiteProvider>
     </AuthProvider>
   );
 }

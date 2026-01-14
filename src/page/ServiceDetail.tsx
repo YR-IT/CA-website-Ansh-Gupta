@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Phone, ChevronRight, ArrowRight, CheckCircle } from 'lucide-react';
 import { servicesAPI } from '../services/api';
+import { useSiteInfo, getPhoneLink } from '../context/SiteContext';
 
 interface ImageData {
   data: string;
@@ -103,6 +104,7 @@ export default function ServiceDetail() {
   const [allServices, setAllServices] = useState<Service[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const { siteInfo } = useSiteInfo();
 
   useEffect(() => {
     if (slug) {
@@ -340,7 +342,7 @@ export default function ServiceDetail() {
                 Get Free Consultation
               </Link>
               <a
-                href="tel:+919034059226"
+                href={getPhoneLink(siteInfo.phone)}
                 className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition"
               >
                 <Phone size={18} /> Call Now

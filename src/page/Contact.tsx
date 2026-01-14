@@ -4,6 +4,7 @@ import ScrollAnimation from "../components/ScrollAnimattion";
 import { motion } from "framer-motion";
 import { contactAPI, aboutUsAPI } from "../services/api";
 import { Link } from "react-router-dom";
+import { useSiteInfo, getPhoneLink, getEmailLink } from "../context/SiteContext";
 
 interface ContactInfo {
   address: string;
@@ -31,6 +32,7 @@ export default function ContactSection() {
     email: '',
     workingHours: ''
   });
+  const { siteInfo } = useSiteInfo();
 
   useEffect(() => {
     const fetchContactInfo = async () => {
@@ -422,7 +424,7 @@ export default function ContactSection() {
                     Call us directly for immediate assistance with your queries.
                   </p>
                   <a
-                    href={`tel:${contactInfo.phone || '+919034059226'}`}
+                    href={getPhoneLink(contactInfo.phone || siteInfo.phone)}
                     className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition-all w-full justify-center shadow-lg shadow-green-500/30"
                   >
                     <Phone size={20} />

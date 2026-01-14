@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import ScrollAnimation from "../components/ScrollAnimattion";
 import { faqAPI } from "../services/api";
+import { useSiteInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "../context/SiteContext";
 
 interface FAQ {
   _id: string;
@@ -33,6 +34,7 @@ export default function Faq() {
   const [groupedFaqs, setGroupedFaqs] = useState<GroupedFAQs>({});
   const [categories, setCategories] = useState<string[]>(defaultCategories);
   const [loading, setLoading] = useState(true);
+  const { siteInfo } = useSiteInfo();
 
   useEffect(() => {
     const fetchFaqs = async () => {
@@ -293,16 +295,16 @@ export default function Faq() {
                 icon: Phone,
                 title: "Call Us",
                 description: "Speak directly with our experts",
-                action: "+91-9034059226",
-                link: "tel:+919034059226",
+                action: siteInfo.phone,
+                link: getPhoneLink(siteInfo.phone),
                 color: "bg-green-100 text-green-600"
               },
               {
                 icon: Mail,
                 title: "Email Us",
                 description: "Get a detailed response",
-                action: "contact@asguptaco.com",
-                link: "mailto:contact@asguptaco.com",
+                action: siteInfo.email,
+                link: getEmailLink(siteInfo.email),
                 color: "bg-blue-100 text-blue-600"
               },
               {
@@ -310,7 +312,7 @@ export default function Faq() {
                 title: "WhatsApp",
                 description: "Quick chat support",
                 action: "Send Message",
-                link: "https://wa.me/919034059226",
+                link: getWhatsAppLink(siteInfo.phone),
                 color: "bg-emerald-100 text-emerald-600"
               }
             ].map((item, index) => (
@@ -362,7 +364,7 @@ export default function Faq() {
                     Book Free Consultation
                   </motion.span>
                 </Link>
-                <a href="tel:+919034059226">
+                <a href={getPhoneLink(siteInfo.phone)}>
                   <motion.span
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

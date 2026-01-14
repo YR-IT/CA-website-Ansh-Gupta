@@ -25,6 +25,7 @@ import { motion } from 'framer-motion';
 import { servicesAPI } from '../services/api';
 import Pagination from '../components/Pagination';
 import ScrollAnimation from '../components/ScrollAnimattion';
+import { useSiteInfo, getPhoneLink } from '../context/SiteContext';
 
 // Icon mapping
 const iconMap: { [key: string]: any } = {
@@ -47,6 +48,7 @@ export default function ServicesSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
+  const { siteInfo } = useSiteInfo();
   const limit = 8;
 
   useEffect(() => {
@@ -111,7 +113,7 @@ export default function ServicesSection() {
                 Get Free Consultation <ArrowRight size={18} />
               </Link>
               <a
-                href="tel:+919034059226"
+                href={getPhoneLink(siteInfo.phone)}
                 className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-3.5 rounded-full font-semibold hover:bg-white/10 transition-all"
               >
                 <Phone size={18} /> Call Now
@@ -238,7 +240,7 @@ export default function ServicesSection() {
                   Schedule Free Consultation <ArrowRight size={18} />
                 </Link>
                 <a
-                  href="tel:+919034059226"
+                  href={getPhoneLink(siteInfo.phone)}
                   className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-3.5 rounded-full font-bold hover:bg-white/10 transition-all"
                 >
                   <Phone size={18} /> Call Us Now

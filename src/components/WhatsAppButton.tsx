@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useSiteInfo, getWhatsAppLink } from "../context/SiteContext";
 
-// WhatsApp number - change this to your actual number
-const WHATSAPP_NUMBER = "919034059226"; // Format: country code + number without +
 const DEFAULT_MESSAGE = "Hello! I would like to know more about your CA services.";
 
 export default function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
+  const { siteInfo } = useSiteInfo();
 
   const handleClick = () => {
-    const encodedMessage = encodeURIComponent(DEFAULT_MESSAGE);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    const whatsappUrl = getWhatsAppLink(siteInfo.phone, DEFAULT_MESSAGE);
     window.open(whatsappUrl, "_blank");
   };
 
   // Hide tooltip after 5 seconds
-  setTimeout(() => setShowTooltip(false), 5000);
+  useEffect(() => {
+    const timer = setTimeout(() => setShowTooltip(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="fixed bottom-6 right-6 z-50">

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Phone, ChevronRight, ArrowRight } from 'lucide-react';
 import { servicesAPI } from '../services/api';
 import ScrollAnimation from '../components/ScrollAnimattion';
+import { useSiteInfo, getPhoneLink } from '../context/SiteContext';
 
 // Color themes for different sub-services
 const colorThemes = [
@@ -562,6 +563,7 @@ export default function SubServiceDetail() {
   const [subService, setSubService] = useState<SubService | null>(null);
   const [otherSubServices, setOtherSubServices] = useState<SubService[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { siteInfo } = useSiteInfo();
 
   // Get unique theme based on sub-service slug
   const theme = useMemo(() =>
@@ -1039,7 +1041,7 @@ export default function SubServiceDetail() {
                   </p>
                   <div className="space-y-3">
                     <a
-                      href="tel:+919034059226"
+                      href={getPhoneLink(siteInfo.phone)}
                       className="flex items-center gap-3 text-white hover:text-blue-200 transition-colors"
                     >
                       <Phone size={18} />
@@ -1078,7 +1080,7 @@ export default function SubServiceDetail() {
                   Contact Us <ArrowRight size={18} />
                 </Link>
                 <a
-                  href="tel:+919034059226"
+                  href={getPhoneLink(siteInfo.phone)}
                   className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-all"
                 >
                   <Phone size={18} /> Call Now

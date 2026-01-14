@@ -8,6 +8,7 @@ import {
   Globe, Receipt, Building, ShieldCheck, Calculator, TrendingUp, FileText, Briefcase
 } from "lucide-react";
 import { servicesAPI } from "../services/api";
+import { useSiteInfo, getPhoneLink } from "../context/SiteContext";
 
 // Icon mapping for services
 const iconMap: { [key: string]: React.ElementType } = {
@@ -45,6 +46,7 @@ interface Service {
 export default function Home() {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
+  const { siteInfo } = useSiteInfo();
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -303,7 +305,7 @@ export default function Home() {
                   Get Free Consultation <ArrowRight size={18} />
                 </Link>
                 <a
-                  href="tel:+919034059226"
+                  href={getPhoneLink(siteInfo.phone)}
                   className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-3.5 rounded-full font-bold hover:bg-white/10 transition"
                 >
                   📞 Call Us Now
