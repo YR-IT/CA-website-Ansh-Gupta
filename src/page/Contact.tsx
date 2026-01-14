@@ -4,7 +4,7 @@ import ScrollAnimation from "../components/ScrollAnimattion";
 import { motion } from "framer-motion";
 import { contactAPI, aboutUsAPI } from "../services/api";
 import { Link } from "react-router-dom";
-import { useSiteInfo, getPhoneLink, getEmailLink } from "../context/SiteContext";
+import { useSiteInfo, getPhoneLink } from "../context/SiteContext";
 
 interface ContactInfo {
   address: string;
