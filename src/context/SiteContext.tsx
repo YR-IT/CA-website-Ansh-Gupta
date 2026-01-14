@@ -16,9 +16,9 @@ interface SiteContextType {
 
 const defaultSiteInfo: SiteInfo = {
   phone: '+919034059226',
-  email: 'info@caanshulgupta.com',
-  address: '',
-  workingHours: 'Mon - Sat: 9:00 AM - 6:00 PM',
+  email: 'contact@asguptaco.com',
+  address: '3A Savitry Enclave, VIP Road, Zirakpur, Punjab',
+  workingHours: 'Mon - Sat: 10:00 AM - 7:00 PM',
   companyName: 'A S Gupta & Co'
 };
 
